@@ -2,15 +2,20 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
+
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'assets/[name][ext]',
+    publicPath: '', // 👈 важно для GitHub Pages
   },
-  mode: 'development', // или 'production'
+
+  mode: 'development', // при деплое можешь поменять на 'production'
+
   module: {
     rules: [
       // JS
@@ -22,7 +27,8 @@ module.exports = {
           options: { presets: ['@babel/preset-env'] },
         },
       },
-      // SCSS
+
+      // SCSS / CSS
       {
         test: /\.s[ac]ss$/i,
         use: [
@@ -31,14 +37,16 @@ module.exports = {
           'sass-loader',
         ],
       },
+
       // Изображения
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
         type: 'asset/resource',
         generator: {
           filename: 'assets/images/[name][ext]',
         },
       },
+
       // Шрифты
       {
         test: /\.(woff2?|eot|ttf|otf)$/i,
@@ -49,21 +57,39 @@ module.exports = {
       },
     ],
   },
+
   plugins: [
     new CleanWebpackPlugin(),
+
+    // Автоматически создаёт index.html с подключёнными bundle.js и style.css
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      filename: 'index.html',
     }),
+
     new MiniCssExtractPlugin({
       filename: 'style.css',
     }),
+
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/assets/images', to: 'assets/images' },
+        { from: 'src/assets/fonts', to: 'assets/fonts' },
+      ],
+    }),
   ],
+
   devServer: {
-    static: './dist',
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
     open: true,
     compress: true,
     port: 3000,
+    hot: true,
+    watchFiles: ['src/**/*'],
   },
+
   resolve: {
     extensions: ['.js', '.scss'],
     alias: {
