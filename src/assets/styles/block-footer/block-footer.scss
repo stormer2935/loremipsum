@@ -1,0 +1,148 @@
+@use '../base/variables' as *;
+
+.block-footer {
+  background-color: #3D4050;
+
+  &__area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    text-align: center;
+
+    * {
+      color: #C3C3C3;
+      font-size: 13px;
+    }
+  }
+
+  &__copyright {
+    order: 3;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  &__payments,
+  &__socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-shrink: 0;
+
+    &-list {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    &-item, &-item a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    &__area {
+      gap: 15px;
+    }
+
+    &__payments,
+    &__socials {
+      width: 100%;
+
+      &-list {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__area {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__payments,
+    &__socials {
+      flex-direction: column;
+      gap: 10px;
+
+      &-list {
+        flex-direction: column;
+      }
+    }
+
+    &__copyright {
+      order: 3;
+      margin-top: 15px;
+    }
+  }
+
+
+  @media (min-width: 1024px) and (max-width: 1199px) {
+    &__area {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    &__payments,
+    &__socials {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+    }
+
+    &__copyright {
+      order: 3;
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    &__area {
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      text-align: left;
+    }
+
+    &__payments,
+    &__socials {
+      flex-direction: row;
+    }
+
+    &__payments,
+    &__socials,
+    &__copyright{
+      &:not(:last-child){
+        position: relative;
+        padding-right: 50px;
+
+        &:after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 1px;
+          height: 18px;
+          background-color: #C3C3C3;
+        }
+      }
+    }
+
+    &__copyright {
+      order: 0;
+      width: auto;
+      margin-top: 0;
+    }
+  }
+}

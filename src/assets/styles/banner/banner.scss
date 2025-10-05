@@ -1,0 +1,86 @@
+@use '../base/variables' as *;
+
+.banner {
+  @media (min-width: 0) {
+    background: url("#{$image-root}banners/banner.webp") 50% 50% no-repeat;
+
+    &__area {
+      min-height: 700px;
+      padding-top: 103px;
+
+      &-title {
+        margin-bottom: 40px;
+      }
+
+      &-description {
+        margin-bottom: 40px;
+
+        li {
+          position: relative;
+          padding-left: 26px;
+
+          &:before {
+            content: '-';
+            position: absolute;
+            top: 0;
+            left: 10px;
+          }
+        }
+      }
+
+      &-buttons {
+        button {
+          width: 183px;
+        }
+      }
+    }
+
+    @media (max-width: 449px) {
+      &__area {
+        &-buttons {
+          text-align: center;
+
+          button {
+            margin-bottom: 15px;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 450px) {
+    &__area {
+      &-buttons {
+        button {
+          margin-right: 30px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+
+
+  @media (min-width: 768px) {
+    &__area {
+      padding-top: 203px;
+      min-height: 850px;
+      background-size: cover;
+      max-width: 780px;
+
+      &-title {
+        margin-bottom: 80px;
+      }
+
+      &-description {
+        margin-bottom: 80px;
+        font-size: 20px;
+      }
+    }
+  }
+}
