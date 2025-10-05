@@ -117,7 +117,9 @@ strong {
 // input
 
 input[type="text"],
-input[type="email"] {
+input[type="email"],
+.input-text,
+.input-email {
   position: relative;
   padding: 11px 35px 11px 10px;
   border: 1px solid $color-white;
