@@ -52,15 +52,15 @@
         background: #7FC0E8;
       }
     }
+  }
+  @media (min-width: 768px) {
+    &__header {
+      margin-bottom: 16px;
+    }
 
-    @media (min-width: 768px) {
-      &__header {
-        margin-bottom: 16px;
-      }
-      &__value, &__label {
-        font-size: 18px;
-        line-height: 1;
-      }
+    &__value, &__label {
+      font-size: 18px;
+      line-height: 1;
     }
   }
 }
